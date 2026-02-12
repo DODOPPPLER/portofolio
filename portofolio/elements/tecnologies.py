@@ -1,67 +1,83 @@
 import reflex as rx
-from ..styles import general_styles
-from ..styles import style_tecnologies
+from ..styles import general_styles as gs
+from ..styles import tecnologies_styles
 
-def tags(text: str, icon_name: str) ->rx.Component:
+def tags(text: str, icon_name: str, border:bool = False) ->rx.Component:
     return rx.hstack(
         rx.image(
             src=icon_name,
-            style=style_tecnologies.img_style
+            style=tecnologies_styles.img_style
             ),
         rx.text(text),
-        style=style_tecnologies.tag_style
+        style=tecnologies_styles.tag_style_bordered if border else tecnologies_styles.tag_style,
     ) 
 
+
 def tecnologies() -> rx.Component:
-    return rx.container(
+    return rx.box(
         rx.vstack(
             rx.text(
                 "Tecnologies",
-                style=style_tecnologies.title_style,
-                
+                style=gs.title_style,                
             ),
-            rx.spacer(height="9em"),
+
             rx.text(
                 "Principal",
-                style=style_tecnologies.subtitle_style,
+                style=gs.subtitle_style,
             ),
-            rx.hstack(
-                tags("Python", "/python.png"),
+            rx.flex(
+                # Python ecosystem
                 rx.vstack(
-                    tags("Reflex", "/database"),
-                    tags("FastAPI", "database"),
-                    tags("Django", "/django.png"),
-                    margin_right="1.5em", 
+                    tags("Python", "/python.png",True),
+                    tags("Django", "/django.png",True),
+                    tags("FastAPI", "/fastapi.png",True),
+                    style=tecnologies_styles.vstack_style
                 ),
-
-                tags("Java", "/java.png"),
+                # Java ecosystem
                 rx.vstack(
-                    tags("Spring", "/spring-boot.png"),
+                    tags("Java", "/java.png",True),
+                    tags("Spring", "/springg.png",True),
+                    style=tecnologies_styles.vstack_style
                 ),
-                margin_bottom="1.5em",            
+                # SQL ecosystem
+                rx.vstack(
+                    tags("SQL", "/sql-server.png",True),
+                    tags("PostgeSQL", "/database(1).png",True),
+                    style=tecnologies_styles.vstack_style
+                ),
+                # NoSQL ecosystem
+                rx.vstack(
+                    tags("NoSQL", "/unstructured-data.png",True),
+                    tags("MongoDB", "/mongo.png",True),
+                    style=tecnologies_styles.vstack_style
+                ),
+                wrap="wrap",
+                justify="center",
+                align="start",
+                spacing="6",
+                width="100%",
             ),
-            rx.hstack(
-                tags("SQL", "/sql-server.png"),   
-                rx.vstack(
-                    tags("MySql", "/database.png"),
-                    tags("PostgeSQL", "/database(1).png"),
-                    tags("SQLite", "database"),
-                    margin_right="1.5em", 
-                ),                  
-                tags("NoSQL", "/unstructured-data.png"),
-                rx.vstack(
-                    tags("MongoDB", "database"),
-                ),                              
-            ),           
+            
+            # Secondary Section
             rx.text(
                 "Secondary",
-                style=style_tecnologies.subtitle_style,
+                style=gs.subtitle_style,
             ),
-            rx.hstack(
+            rx.flex(
                 tags("HTML", "/html-5.png"),
                 tags("CSS", "/css-3.png"),
-                tags("JS", "/java-script.png"),                
-            ),
-            align="center",
-        )
+                tags("JS", "/java-script.png"), 
+                tags("Reflex", "/reflex.png"),
+                tags("MySql", "/database.png"),
+                tags("SQLite", "/sql-server.png"),
+                wrap="wrap",
+                justify="center",
+                spacing="2",
+                width="100%",
+            ),          
+            width="90%",
+            style = gs.container_style            
+        ),      
+        width="100%",
+        style = gs.container_style
     )

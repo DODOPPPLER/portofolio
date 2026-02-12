@@ -10,8 +10,10 @@ hstack_style={
     "max_height": "20em",
     "min_height": "3em",
     "align_items": "center",
-    "margin_bottom": "4em",
+    "gap": "1.5em",
+    "margin": "1em 0",
 }
+
 
 buttons_style={
     "bg_color": gs.color_primary,
@@ -21,4 +23,9 @@ buttons_style={
     "border_radius": "10em",
     "cursor": "pointer",
     "min_width": "9em",
+
+    "_hover": {
+        "background_color": gs.border_color,
+        "box_shadow": f"0 0 15px {gs.border_color}80",
+    }
 }
