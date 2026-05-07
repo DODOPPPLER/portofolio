@@ -79,5 +79,6 @@ def tecnologies() -> rx.Component:
             style = gs.container_style            
         ),      
         width="100%",
-        style = gs.container_style
+        style = gs.container_style,
+        margin_top="6em",
     )
